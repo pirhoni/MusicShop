@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/templates/newtemplate.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="pageTitle">Create new account</ui:define>
+    <ui:define name="content">        
+        <f:view>
+            <h:form styleClass="hor-minimalist-a">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Name:" for="name" />
+                    <h:inputText id="name" value="#{createAccount.customer.name}" requiredMessage="Enter your name!" title="Name" />
+                    <h:message for="name"/>
+                    <h:outputLabel value="Address:" for="address" />
+                    <h:inputText id="address" value="#{createAccount.customer.address}" requiredMessage="Enter your address!" title="Address" />
+                    <h:message for="address"/>
+                    <h:outputLabel value="Email:" for="email" />
+                    <h:inputText id="email" value="#{createAccount.customer.email}" requiredMessage="Enter your Email" title="Email" />
+                    <h:message for="email"/>
+                    <h:outputLabel value="Username:" for="username" />
+                    <h:inputText id="username" value="#{createAccount.customer.username}" requiredMessage="Enter your username!" title="Username" required="true"/>
+                    <h:message for="username"/>
+                    <h:outputLabel value="Password:" for="password" />
+                    <h:inputSecret id="password" value="#{createAccount.customer.password}" requiredMessage="Enter your password!" title="Password" required="true"/>
+                    <h:message for="password"/>
+                    <h:outputLabel value="Re-enter Password:" for="password2" />
+                    <h:inputSecret id="password2" value="#{createAccount.customer.password}" requiredMessage="Verify your password!" title="Password" required="true"/>
+                    <h:message for="password2"/>
+                </h:panelGrid>
+                <div class="buttons">
+                    <h:commandButton action="#{createAccount.create}" value="Create" />
+                </div>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>

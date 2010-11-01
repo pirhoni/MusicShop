@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/templates/newtemplate.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="pageTitle"></ui:define>
+    <ui:define name="content">
+        <f:view>
+            <h:form id="products" styleClass="hor-minimalist-b">
+                <h1 class="smalltitle"><h:outputText value="Available Products"/></h1>
+                <h:dataTable value="#{product.products}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Title"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Genre"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Interpret"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mediapath}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Price"/>
+                        </f:facet>
+                        <h:outputText value="#{item.unitprice}"/>
+                    </h:column>
+
+                    <h:column rendered="#{customer.loggedIn}">
+                        <div class="buttons">
+                            <h:commandButton value="Add to cart" action="#{product.addToCart(item)}">
+                                <f:ajax render=":products :cart"/>
+                            </h:commandButton>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+        <f:view>
+            <h:form id="cart" rendered="#{customer.loggedIn}" styleClass="hor-minimalist-b">
+                <h2 class="smalltitle"><h:outputText value="Cart"/></h2>
+                <h:dataTable value="#{product.cartProducts}" var="item">
+                    <!--                    <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="#"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.id}"/>
+                                        </h:column>-->
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Title"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Genre"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Interpret"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mediapath}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Price"/>
+                        </f:facet>
+                        <h:outputText value="#{item.unitprice}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Quantity"/>
+                        </f:facet>
+                        <h:outputText value="#{product.showQuantity(item)}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandLink action="#{product.increase(item)}" value="+" styleClass="obenunten">
+                            <f:ajax render=":cart"/>
+                        </h:commandLink>
+                        <h:commandLink action="#{product.decrease(item)}" value="-" styleClass="obenunten">
+                            <f:ajax render=":cart"/>
+                        </h:commandLink>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Remove"/>
+                        </f:facet>
+                        <div class="buttons">
+                            <h:commandButton value="Remove from cart" action="#{product.removeFromCart(item)}">
+                                <f:ajax render=":products :cart"/>
+                            </h:commandButton>
+                        </div>
+                    </h:column>
+                </h:dataTable>            
+            </h:form>
+        </f:view>
+        <h:form rendered="#{customer.loggedIn}">
+            <div class="buttons">
+                <a href="Checkout.xhtml">Checkout</a>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

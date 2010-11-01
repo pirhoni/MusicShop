@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/templates/newtemplate.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="pageTitle">My Account</ui:define>
+    <ui:define name="content">
+        <f:view>          
+            <h:form rendered="#{customer.loggedIn}" styleClass="hor-minimalist-a">
+                <h:panelGrid columns="2">                    
+                    <h:outputLabel value="Name:" for="name" />
+                    <h:inputText id="name" value="#{customer.loggedInCustomer.name}" title="Name" />
+                    <h:outputLabel value="Address:" for="address" />
+                    <h:inputText id="address" value="#{customer.loggedInCustomer.address}" title="Address" />
+                    <h:outputLabel value="Email:" for="email" />
+                    <h:inputText id="email" value="#{customer.loggedInCustomer.email}" title="Email" />
+                    <h:outputLabel value="Username:" for="username" />
+                    <h:inputText id="username" value="#{customer.loggedInCustomer.username}" title="Username" required="true" requiredMessage="The Username field is required."/>
+                    <h:outputLabel value="Password:" for="password" />
+                    <h:inputSecret id="password" value="#{customer.tempPw}" title="Password" />                    
+                </h:panelGrid>
+                <div class="buttons">
+                    <h:commandButton action="#{customer.updateCustomer}" value="Save" />
+                </div>                
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>

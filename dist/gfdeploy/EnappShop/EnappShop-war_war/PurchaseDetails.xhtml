@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/templates/newtemplate.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="pageTitle">Purchase Detailes</ui:define>
+
+    <f:metadata>
+        <f:viewParam name="purchaseid" value="#{customer.purchaseId}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <f:view>
+            <h:form styleClass="hor-minimalist-b">
+                <h1><h:outputText value="A list of your purchased Items"/></h1>
+                <h:dataTable value="#{customer.purchaseItems}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{item.purchaseid}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Quantity"/>
+                        </f:facet>
+                        <h:outputText value="#{item.quantity}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Price"/>
+                        </f:facet>
+                        <h:outputText value="#{item.unitprice}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Details"/>
+                        </f:facet>
+                        <div class="buttons">
+                            <h:outputLink value="ProductPurchase.xhtml?productid=#{item.productid}">
+                                <h:outputText value="More"/>
+                            </h:outputLink>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>
