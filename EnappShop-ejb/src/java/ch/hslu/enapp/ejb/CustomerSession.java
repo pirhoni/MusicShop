@@ -5,7 +5,6 @@
 package ch.hslu.enapp.ejb;
 
 import ch.hslu.enapp.entities.Customer;
-import ch.hslu.enapp.entities.Product;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
 import java.util.List;
