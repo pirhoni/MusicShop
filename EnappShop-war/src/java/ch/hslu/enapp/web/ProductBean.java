@@ -6,6 +6,8 @@ package ch.hslu.enapp.web;
 
 import ch.hslu.enapp.ejb.ProductSessionRemote;
 import ch.hslu.enapp.entities.Product;
+import ch.hslu.enapp.salesorder.Item;
+import ch.hslu.enapp.salesorder.ItemList;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,13 @@ public class ProductBean implements Serializable {
     @Inject
     private CustomerBean customer;
 
+    //DynNav Integration-----------------------------------------------
+    private ArrayList<Item> dynNavBasket = new ArrayList<Item>();
+
+    public ItemList getDynNavItemList() {
+        return productSession.getNavItems();
+    }
+    //------------------------------------------------------------------
 
     /** Creates a new instance of ProductBean */
     public ProductBean() {

@@ -8,10 +8,15 @@ import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Product;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
+import ch.hslu.enapp.nav.DynNav;
+import ch.hslu.enapp.salesorder.Item;
+import ch.hslu.enapp.salesorder.ItemList;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ejb.Schedule;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,6 +33,43 @@ public class ProductSession implements ProductSessionRemote {
     private EntityManager em;
     private Purchase purchase = new Purchase();
     private Map<Product, Purchaseitem> cart = new HashMap<Product, Purchaseitem>();
+
+    //DynNav Integration-------------------------------------------------------------
+    private DynNav dynNav = new DynNav();
+
+    @Schedule(minute="*/15", hour="*")
+    public void reconcyle() {
+        Product p;
+        Query q;
+
+        for (Item item : dynNav.getNavItems().getItem()) {
+            q = em.createNamedQuery("Product.findByReference");
+            q.setParameter("reference", item.getNo());
+
+            try {
+                p = (Product) q.getSingleResult();
+                p.setName(item.getDescription());
+                p.setMediapath(item.getMediafileName());
+                p.setDescription(item.getDescription());
+                p.setUnitprice(item.getUnitPrice().longValue());
+                em.merge(item);
+            } catch (Exception e) {
+                System.out.println("Error merging product to DB"+e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public List<ItemList> getDynNavItems() {
+        return (List<ItemList>) dynNav.getNavItems();
+    }
+
+    @Override
+    public ItemList getNavItems() {
+        return dynNav.getNavItems();
+    }
+
+    //--------------------------------------------------------------------------------
 
     public void persist(Object object) {
         em.persist(object);
