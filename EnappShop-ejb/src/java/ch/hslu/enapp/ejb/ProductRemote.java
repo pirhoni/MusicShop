@@ -41,11 +41,11 @@ public class ProductRemote {
         Query q;
 
         for (Item item : dynNav.getNavItems().getItem()) {
-            String s = item.getNo();
-            s = s.substring(4, item.getNo().length());
-            int dynNavId = Integer.parseInt(s);
-            q = em.createNamedQuery("Product.findById");
-            q.setParameter("id", dynNavId);
+//            String s = item.getNo();
+//            s = s.substring(4, item.getNo().length());
+//            int dynNavId = Integer.parseInt(s);
+            q = em.createNamedQuery("Product.findByReference");
+            q.setParameter("reference", item.getNo());
 
             try {
                 try {
@@ -56,6 +56,7 @@ public class ProductRemote {
                     p.setName(item.getDescription());
                     p.setMediapath(item.getMediafileName());
                     p.setDescription(item.getDescription());
+                    p.setReference(item.getNo());
                     p.setUnitprice(item.getUnitPrice().longValue());
                     em.merge(p);
                 } catch (Exception e) {
