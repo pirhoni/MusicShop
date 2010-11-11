@@ -32,14 +32,6 @@ public class ProductBean implements Serializable {
     @Inject
     private CustomerBean customer;
 
-    //DynNav Integration-----------------------------------------------
-    private ArrayList<Item> dynNavBasket = new ArrayList<Item>();
-
-    public ItemList getDynNavItemList() {
-        return productSession.getNavItems();
-    }
-    //------------------------------------------------------------------
-
     /** Creates a new instance of ProductBean */
     public ProductBean() {
     }

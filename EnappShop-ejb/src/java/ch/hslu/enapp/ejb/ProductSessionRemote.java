@@ -6,7 +6,6 @@ package ch.hslu.enapp.ejb;
 
 import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Product;
-import ch.hslu.enapp.salesorder.ItemList;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -37,9 +36,4 @@ public interface ProductSessionRemote {
 
     public void decrease(Product product);
 
-    //DynNav Integration----------------------------
-    public List<ItemList> getDynNavItems();
-
-    public ItemList getNavItems();
-    //----------------------------------------------
 }
