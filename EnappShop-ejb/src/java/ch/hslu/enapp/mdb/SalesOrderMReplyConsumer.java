@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hslu.enapp.ejb.mdb;
+package ch.hslu.enapp.mdb;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;

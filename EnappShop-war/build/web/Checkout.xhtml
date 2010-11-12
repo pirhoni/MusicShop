@@ -4,18 +4,12 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html">
 
-    <ui:define name="pageTitle">Checkout</ui:define>
+    <ui:define name="pageTitle"></ui:define>
     <ui:define name="content">
-
         <f:view>
-            <h:form>
+            <h:form id="checkout" styleClass="hor-minimalist-b">
+                <h1 class="smalltitle"><h:outputText value="Checkout"/></h1>
                 <h:dataTable value="#{product.cartProducts}" var="item">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Name"/>
@@ -24,24 +18,12 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Description"/>
-                        </f:facet>
-                        <h:outputText value="#{item.description}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Mediapath"/>
-                        </f:facet>
-                        <h:outputText value="#{item.mediapath}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
                             <h:outputText value="Unitprice"/>
                         </f:facet>
                         <h:outputText value="#{item.unitprice}"/>
                     </h:column>
                 </h:dataTable>
-
+                <h:outputText value="Total Price: #{product.cartAmount}"/>
                 <h:form rendered="#{customer.loggedIn}">
                     <div class="buttons">
                         <h:commandButton action="#{product.checkout}" value="Buy!">

@@ -8,6 +8,7 @@ import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Product;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +67,15 @@ public class ProductSession implements ProductSessionRemote {
     }
 
     @Override
+    public float getCartAmount() {
+        float amount = 0f;
+        for (Product p : cart.keySet()) {
+            amount += p.getUnitprice();
+        }
+        return amount;
+    }
+
+    @Override
     public void removeFromCart(Product product) {
         cart.remove(product);
     }
@@ -109,5 +119,4 @@ public class ProductSession implements ProductSessionRemote {
             cart.remove(product);
         }
     }
-
 }

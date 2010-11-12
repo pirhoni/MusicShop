@@ -36,4 +36,6 @@ public interface ProductSessionRemote {
 
     public void decrease(Product product);
 
+    public float getCartAmount();
+
 }

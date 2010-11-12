@@ -6,7 +6,7 @@ package ch.hslu.enapp.web;
 
 import ch.hslu.enapp.ejb.CustomerSessionRemote;
 import ch.hslu.enapp.ejb.PostFinanceBean;
-import ch.hslu.enapp.ejb.mdb.SalesOrderMSender;
+import ch.hslu.enapp.mdb.SalesOrderMSender;
 import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
@@ -120,6 +120,10 @@ public class CustomerBean implements Serializable {
 
     public Customer getLoggedInCustomer() {
         return login.getCustomer();
+    }
+
+    public float fetchTotal(int id) {
+        return customerSession.getTotal(id);
     }
 
     public void testPayment() {

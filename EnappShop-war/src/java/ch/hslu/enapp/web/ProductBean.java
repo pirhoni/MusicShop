@@ -6,8 +6,6 @@ package ch.hslu.enapp.web;
 
 import ch.hslu.enapp.ejb.ProductSessionRemote;
 import ch.hslu.enapp.entities.Product;
-import ch.hslu.enapp.salesorder.Item;
-import ch.hslu.enapp.salesorder.ItemList;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +64,10 @@ public class ProductBean implements Serializable {
 
     public List<Product> getCartProducts() {
         return new ArrayList(productSession.getCart().keySet());
+    }
+
+    public float getCartAmount() {
+        return productSession.getCartAmount();
     }
 
     public Long showQuantity(Product product) {

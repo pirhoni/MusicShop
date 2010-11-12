@@ -31,4 +31,6 @@ public interface CustomerSessionRemote {
     public Customer saveCustomer(Customer customer);
 
     public Customer verifyLogin(String username, String password);
+
+    public float getTotal(int purchaseId);
 }

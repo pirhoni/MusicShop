@@ -9,8 +9,8 @@ import ch.hslu.enapp.nav.DynNav;
 import ch.hslu.enapp.salesorder.Item;
 import ch.hslu.enapp.salesorder.ItemList;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.ejb.Schedule;
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -19,7 +19,7 @@ import javax.persistence.Query;
  *
  * @author nnussbaumer
  */
-@Stateless
+@Singleton
 public class DynNavProduct {
 
     @PersistenceContext(unitName = "EnappShop-ejbPU")

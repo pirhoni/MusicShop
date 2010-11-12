@@ -5,7 +5,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <ui:define name="pageTitle">Purchase Detailes</ui:define>
+    <ui:define name="pageTitle">Purchase Details</ui:define>
 
     <f:metadata>
         <f:viewParam name="purchaseid" value="#{customer.purchaseId}"/>
@@ -16,12 +16,6 @@
             <h:form styleClass="hor-minimalist-b">
                 <h1><h:outputText value="A list of your purchased Items"/></h1>
                 <h:dataTable value="#{customer.purchaseItems}" var="item">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#"/>
-                        </f:facet>
-                        <h:outputText value="#{item.purchaseid}"/>
-                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Quantity"/>
@@ -40,17 +34,8 @@
                         </f:facet>
                         <h:outputText value="#{item.description}"/>
                     </h:column>
-<!--                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Details"/>
-                        </f:facet>
-                        <div class="buttons">
-                            <h:outputLink value="ProductPurchase.xhtml?productid=#{item.productid}">
-                                <h:outputText value="More"/>
-                            </h:outputLink>
-                        </div>
-                    </h:column>-->
                 </h:dataTable>
+                <h:outputText value = "Total Price:  #{customer.fetchTotal(customer.purchaseId)}"/>
             </h:form>
         </f:view>
     </ui:define>

@@ -7,6 +7,7 @@ package ch.hslu.enapp.ejb;
 import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -67,5 +68,12 @@ public class CustomerSession implements CustomerSessionRemote {
         q.setParameter("password", password);
         List<Customer> list = q.getResultList();
         return list.isEmpty() ? null : list.get(0);
+    }
+
+    @Override
+    public float getTotal(int purchaseId) {
+        Query q = em.createNativeQuery("SELECT sum(unitprice * quantity) as total FROM purchaseitem where purchaseid = " + purchaseId);
+        BigDecimal count = (BigDecimal) q.getSingleResult();
+        return new Float(count.floatValue());
     }
 }
