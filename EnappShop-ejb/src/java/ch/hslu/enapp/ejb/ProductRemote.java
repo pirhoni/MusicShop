@@ -34,9 +34,9 @@ public class ProductRemote {
         return dynNav.getNavItems();
     }
 
-    @Schedule(minute = "*/1", hour = "*")
+    @Schedule(minute = "*/15", hour = "*")
     public void reconcile() {
-        System.out.println("calling reconcile");
+//        System.out.println("calling reconcile");
         Product p;
         Query q;
 

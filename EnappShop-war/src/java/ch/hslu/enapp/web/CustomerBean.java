@@ -5,9 +5,11 @@
 package ch.hslu.enapp.web;
 
 import ch.hslu.enapp.ejb.CustomerSessionRemote;
+import ch.hslu.enapp.ejb.PostFinanceBean;
 import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
+import ch.hslu.enapp.payment.CreditCard;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -28,6 +30,10 @@ public class CustomerBean implements Serializable {
 
     @EJB
     private CustomerSessionRemote customerSession;
+
+    @EJB
+    private PostFinanceBean postFinance;
+
     private Login login = new Login();
     private Customer customer;
     private int purchaseId;
@@ -70,8 +76,8 @@ public class CustomerBean implements Serializable {
 
     public String login() {
         login.setCustomer(customerSession.verifyLogin(login.getUsername(), login.getPassword()));
-        if(login.getCustomer() == null){
-            FacesContext.getCurrentInstance().addMessage("login:username",new FacesMessage(FacesMessage.SEVERITY_INFO,
+        if (login.getCustomer() == null) {
+            FacesContext.getCurrentInstance().addMessage("login:username", new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Wrong password/username", "Wrong password/username"));
             return null;
         }
@@ -84,7 +90,7 @@ public class CustomerBean implements Serializable {
     }
 
     public String updateCustomer() {
-        if(tempPw.length() > 0 ) {
+        if (tempPw.length() > 0) {
             login.getCustomer().setPassword(tempPw);
         }
         customerSession.saveCustomer(login.getCustomer());
@@ -98,7 +104,7 @@ public class CustomerBean implements Serializable {
     public List<Purchaseitem> getPurchaseItems() {
         return customerSession.getPurchaseItems(purchaseId);
     }
-    
+
     public List<Purchase> getPurchases() {
         return customerSession.getPurchases(login.getCustomer());
     }
@@ -111,13 +117,12 @@ public class CustomerBean implements Serializable {
         return login.getCustomer();
     }
 
-    public String extractPurchases (Purchase p) {
-        if(p == null)
-            return null;
-        String itmes = "";
-        int i = 0;
-        
-        return "";
+    public void testPayment() {
+        CreditCard cc = new CreditCard();
+        cc.setCardNo("123-456-789");
+        cc.setCustomerName("nicolas");
+        cc.setCvc("123");
+        cc.setExpiryDate("12-12-2012");
+        postFinance.makePayment(98437593, 20, cc);
     }
-
 }

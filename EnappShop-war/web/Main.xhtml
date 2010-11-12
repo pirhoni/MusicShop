@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/resources/templates/newtemplate.xhtml">
+                template="/resources/templates/newtemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
     <!--                template="/resources/templates/tie.xhtml">-->
 
     <ui:define name="pageTitle">Welcome</ui:define>
@@ -8,5 +9,8 @@
         <p>
             Feel free to brows through our exclusive selection of tunes!
         </p>
+        <h:form>
+            <h:commandButton action="#{customer.testPayment}" value ="Make Payment" />
+        </h:form>
     </ui:define>
 </ui:composition>

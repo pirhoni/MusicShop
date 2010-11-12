@@ -18,7 +18,7 @@
                 <h:dataTable value="#{customer.purchaseItems}" var="item">
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="ID"/>
+                            <h:outputText value="#"/>
                         </f:facet>
                         <h:outputText value="#{item.purchaseid}"/>
                     </h:column>
@@ -40,7 +40,7 @@
                         </f:facet>
                         <h:outputText value="#{item.description}"/>
                     </h:column>
-                    <h:column>
+<!--                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Details"/>
                         </f:facet>
@@ -49,7 +49,7 @@
                                 <h:outputText value="More"/>
                             </h:outputLink>
                         </div>
-                    </h:column>
+                    </h:column>-->
                 </h:dataTable>
             </h:form>
         </f:view>
