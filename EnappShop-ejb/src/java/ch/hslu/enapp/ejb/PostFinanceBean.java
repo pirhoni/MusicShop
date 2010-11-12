@@ -28,13 +28,14 @@ import javax.xml.bind.Unmarshaller;
 @Stateless
 public class PostFinanceBean {
 
-    public void makePayment(Integer id, long totalPrice, CreditCard creditCard) {
+    public NcResponse makePayment(Integer id, long totalPrice, CreditCard creditCard) {
 
         String orderID = Integer.toString(id);
         String amount = Long.toString(totalPrice * 100);
         String ccNumber = creditCard.getCardNo();
         String ccExpiryDate = creditCard.getExpiryDate();
         String ccCustomerName = creditCard.getCustomerName();
+        String ccCVC = creditCard.getCvc();
 
         try {
             MultivaluedMap formData = new MultivaluedMapImpl();
@@ -46,20 +47,27 @@ public class PostFinanceBean {
             formData.add("currency", "CHF");
             formData.add("CARDNO", ccNumber);
             formData.add("ED", ccExpiryDate);
+            formData.add("CVC", ccCVC);
             formData.add("CN", ccCustomerName);
-            formData.add("operation", "SAL");
+
+            //Muss auskommentiert werden da ansonsten HASH Wert falsch erzeugt wird
+            //formData.add("operation", "SAL");
             formData.add("SHASign", Util.createSHA1(orderID + amount + "CHF" + ccNumber + Util.PSPID + Util.SHA1PWDIN));
 
             Client client = Client.create();
             WebResource resource = client.resource("https://e-payment.postfinance.ch/ncol/test/orderdirect.asp");
             ClientResponse response = resource.type("application/x-www-form-urlencoded ").post(ClientResponse.class, formData);
-            
+
+            //unmarshalling of JAX Response
             JAXBContext jc = JAXBContext.newInstance(ch.hslu.enapp.payment.NcResponse.class);
             Unmarshaller u = jc.createUnmarshaller();
-            
-            NcResponse ncResponce = (NcResponse)u.unmarshal(response.getEntityInputStream());
-            System.out.println(ncResponce);
-            System.out.println(ncResponce.getOrderID());
+
+            NcResponse ncResponse = (NcResponse) u.unmarshal(response.getEntityInputStream());
+
+            //Print response as debug
+            System.out.println(ncResponse);
+
+            return ncResponse;
 
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(PostFinanceBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,5 +76,7 @@ public class PostFinanceBean {
         } catch (JAXBException ex) {
             Logger.getLogger(PostFinanceBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return null;
     }
 }

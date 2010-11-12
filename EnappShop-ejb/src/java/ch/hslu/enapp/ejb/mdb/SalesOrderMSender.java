@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Random;
 import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -28,6 +29,7 @@ import javax.jms.TemporaryQueue;
  *
  * @author nnussbaumer
  */
+@Stateless
 public class SalesOrderMSender {
 
     @Resource(mappedName = "jms/EnappQueueFactory")

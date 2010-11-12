@@ -6,10 +6,12 @@ package ch.hslu.enapp.web;
 
 import ch.hslu.enapp.ejb.CustomerSessionRemote;
 import ch.hslu.enapp.ejb.PostFinanceBean;
+import ch.hslu.enapp.ejb.mdb.SalesOrderMSender;
 import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
 import ch.hslu.enapp.payment.CreditCard;
+import ch.hslu.enapp.payment.NcResponse;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -33,6 +35,9 @@ public class CustomerBean implements Serializable {
 
     @EJB
     private PostFinanceBean postFinance;
+
+    @EJB
+    private SalesOrderMSender salesOrderMSender;
 
     private Login login = new Login();
     private Customer customer;
@@ -119,10 +124,12 @@ public class CustomerBean implements Serializable {
 
     public void testPayment() {
         CreditCard cc = new CreditCard();
-        cc.setCardNo("123-456-789");
+        cc.setCardNo("4111111111111111");
         cc.setCustomerName("nicolas");
         cc.setCvc("123");
-        cc.setExpiryDate("12-12-2012");
-        postFinance.makePayment(98437593, 20, cc);
+        cc.setExpiryDate("12/12");
+        NcResponse ncResponse = postFinance.makePayment(98437593, 20, cc);
+        //Objekt JMSOrdre bla generieren und übergeben
+        
     }
 }

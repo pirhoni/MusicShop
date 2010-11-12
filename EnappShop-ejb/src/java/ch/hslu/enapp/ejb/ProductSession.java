@@ -8,8 +8,6 @@ import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Product;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
-import ch.hslu.enapp.nav.DynNav;
-import ch.hslu.enapp.salesorder.ItemList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;

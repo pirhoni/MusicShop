@@ -20,7 +20,7 @@ import javax.persistence.Query;
  * @author nnussbaumer
  */
 @Stateless
-public class ProductRemote {
+public class DynNavProduct {
 
     @PersistenceContext(unitName = "EnappShop-ejbPU")
     private EntityManager em;
