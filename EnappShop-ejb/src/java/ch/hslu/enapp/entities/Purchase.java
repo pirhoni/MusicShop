@@ -30,7 +30,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Purchase.findById", query = "SELECT p FROM Purchase p WHERE p.id = :id"),
     @NamedQuery(name = "Purchase.findByCustomerid", query = "SELECT p FROM Purchase p WHERE p.customerid = :customerid"),
     @NamedQuery(name = "Purchase.findByDatetime", query = "SELECT p FROM Purchase p WHERE p.datetime = :datetime"),
-    @NamedQuery(name = "Purchase.findByStatus", query = "SELECT p FROM Purchase p WHERE p.status = :status")})
+    @NamedQuery(name = "Purchase.findByStatus", query = "SELECT p FROM Purchase p WHERE p.status = :status"),
+    @NamedQuery(name = "Purchase.findByCorrelationId", query = "SELECT p FROM Purchase p WHERE p.correlationId = :correlationId")})
 public class Purchase implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,6 +47,8 @@ public class Purchase implements Serializable {
     private Date datetime;
     @Column(name = "status", length = 15)
     private String status;
+    @Column(name = "correlationId", length = 45)
+    private String correlationId;
 
     public Purchase() {
     }
@@ -89,6 +92,14 @@ public class Purchase implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCorrelationId() {
+        return correlationId;
+    }
+
+    public void setCorrelationId(String correlationId) {
+        this.correlationId = correlationId;
     }
 
     @Override

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hslu.enapp.ejb;
+package ch.hslu.enapp.dynnav;
 
 import ch.hslu.enapp.entities.Product;
 import ch.hslu.enapp.nav.DynNav;
@@ -36,7 +36,6 @@ public class DynNavProduct {
 
     @Schedule(minute = "*/15", hour = "*")
     public void reconcile() {
-//        System.out.println("calling reconcile");
         Product p;
         Query q;
 

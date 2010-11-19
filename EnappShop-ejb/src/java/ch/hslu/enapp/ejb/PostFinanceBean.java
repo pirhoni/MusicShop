@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 /**
@@ -37,46 +36,44 @@ public class PostFinanceBean {
         String ccCustomerName = creditCard.getCustomerName();
         String ccCVC = creditCard.getCvc();
 
+        MultivaluedMap formData = new MultivaluedMapImpl();
+        NcResponse ncResponse = null;
+        formData.add("PSPID", Util.PSPID);
+        formData.add("OrderId", orderID);
+        formData.add("USERID", Util.USERID);
+        formData.add("PSWD", Util.PSWD);
+        formData.add("amount", amount);
+        formData.add("currency", "CHF");
+        formData.add("CARDNO", ccNumber);
+        formData.add("ED", ccExpiryDate);
+        formData.add("CVC", ccCVC);
+        formData.add("CN", ccCustomerName);
         try {
-            MultivaluedMap formData = new MultivaluedMapImpl();
-            formData.add("PSPID", Util.PSPID);
-            formData.add("OrderId", orderID);
-            formData.add("USERID", Util.USERID);
-            formData.add("PSWD", Util.PSWD);
-            formData.add("amount", amount);
-            formData.add("currency", "CHF");
-            formData.add("CARDNO", ccNumber);
-            formData.add("ED", ccExpiryDate);
-            formData.add("CVC", ccCVC);
-            formData.add("CN", ccCustomerName);
-
             //Muss auskommentiert werden da ansonsten HASH Wert falsch erzeugt wird
             //formData.add("operation", "SAL");
             formData.add("SHASign", Util.createSHA1(orderID + amount + "CHF" + ccNumber + Util.PSPID + Util.SHA1PWDIN));
-
-            Client client = Client.create();
-            WebResource resource = client.resource("https://e-payment.postfinance.ch/ncol/test/orderdirect.asp");
-            ClientResponse response = resource.type("application/x-www-form-urlencoded ").post(ClientResponse.class, formData);
-
-            //unmarshalling of JAX Response
-            JAXBContext jc = JAXBContext.newInstance(ch.hslu.enapp.payment.NcResponse.class);
-            Unmarshaller u = jc.createUnmarshaller();
-
-            NcResponse ncResponse = (NcResponse) u.unmarshal(response.getEntityInputStream());
-
-            //Print response as debug
-            System.out.println(ncResponse);
-
-            return ncResponse;
-
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(PostFinanceBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(PostFinanceBean.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JAXBException ex) {
-            Logger.getLogger(PostFinanceBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return null;
+        Client client = Client.create();
+        WebResource resource = client.resource("https://e-payment.postfinance.ch/ncol/test/orderdirect.asp");
+        ClientResponse response = resource.type("application/x-www-form-urlencoded ").post(ClientResponse.class, formData);
+
+        try {
+            //unmarshalling of JAX Response
+            JAXBContext jc = JAXBContext.newInstance(ch.hslu.enapp.payment.NcResponse.class);
+            Unmarshaller u = jc.createUnmarshaller();
+            ncResponse = (NcResponse) u.unmarshal(response.getEntityInputStream());
+
+            //Print response as debug
+            System.out.println("NCResponse: " + ncResponse);
+        } catch (Exception e) {
+            System.out.println("PAYMENT EXCEPTION: " + e.getMessage());
+        }
+        System.out.println(ncResponse);
+        return ncResponse;
     }
 }

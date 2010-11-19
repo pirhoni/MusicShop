@@ -28,7 +28,7 @@
                         <f:facet name="header">
                             <h:outputText value="Status"/>
                         </f:facet>
-                        <h:outputText value="#{item.status}"/>
+                        <h:outputText value="#{checkOrderMBean.checkOrderStatus(item.correlationId)}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">

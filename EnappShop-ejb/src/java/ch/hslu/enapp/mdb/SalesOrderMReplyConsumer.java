@@ -33,7 +33,6 @@ public class SalesOrderMReplyConsumer implements MessageListener {
             System.out.println("Received Message Done");
         } catch (JMSException jmse) {
             System.out.println("Received Message Fail: " + jmse.getMessage());
-            jmse.printStackTrace();
         }
     }
 }
