@@ -18,7 +18,7 @@
         <div id="wrapper">
             <div id="logo">
                 <h1>MusicShop</h1>
-                <p>ICompany Luzern</p>
+                <p>iCompany Luzern</p>
             </div>
             <div id="menu">
                 <c:if test="#{!customer.loggedIn}">
@@ -44,7 +44,7 @@
                         <h:outputText value="Welcome dear Visitor"/>
                     </c:if>
                     <c:if test="#{customer.loggedIn}">
-                        <h:outputText value="#{customer.login.customer.name}"/>
+                        <h:outputText value="Welcome #{customer.login.customer.name}"/>
                     </c:if>
                 </div>
 

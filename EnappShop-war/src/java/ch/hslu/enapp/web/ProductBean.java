@@ -6,6 +6,7 @@ package ch.hslu.enapp.web;
 
 import ch.hslu.enapp.ejb.ProductSessionRemote;
 import ch.hslu.enapp.entities.Product;
+import ch.hslu.enapp.payment.CreditCard;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,13 @@ public class ProductBean implements Serializable {
     @EJB
     private ProductSessionRemote productSession;
     private Product product;
-    
     @Inject
     private CustomerBean customer;
+
+    private String cardNumber = "4111111111111111";
+    private String veriCode = "123";
+    private String expDate = "12/12";
+    private String holder = "nicolas";
 
     /** Creates a new instance of ProductBean */
     public ProductBean() {
@@ -83,7 +88,14 @@ public class ProductBean implements Serializable {
     }
 
     public String checkout() {
-        productSession.checkout(customer.getLogin().getCustomer());
+
+        CreditCard cc = new CreditCard();
+        cc.setCardNo("4111111111111111");
+        cc.setCustomerName("nicolas");
+        cc.setCvc("123");
+        cc.setExpiryDate("12/12");
+
+        productSession.checkout(customer.getLogin().getCustomer(), cc);
         return "Thanks?faces-redirect=true";
     }
 
@@ -93,5 +105,21 @@ public class ProductBean implements Serializable {
 
     public void decrease(Product product) {
         productSession.decrease(product);
+    }
+
+    public String getCardHolder() {
+        return holder;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public String getExpDate() {
+        return expDate;
+    }
+
+    public String getVerifyCode() {
+        return veriCode;
     }
 }

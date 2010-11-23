@@ -30,7 +30,21 @@
                             <f:ajax/>
                         </h:commandButton>
                     </div>
-                </h:form>
+                </h:form>    
+            </h:form>
+        </f:view>
+        <f:view>
+            <h:form id ="creditcard" styleClass="hor-minimalist-b">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Credit Card Number" for="card" />
+                    <h:outputText id="card" value="#{product.cardNumber}" title="Credit Card Number"/>
+                    <h:outputLabel value="Verification Code" for="vercode" />
+                    <h:outputText id="vercode" value="#{product.verifyCode}" title="Verification Code"/>
+                    <h:outputLabel value="Expiry Date(MM/YY)" for="expdate" />
+                    <h:outputText id="expdate" value="#{product.expDate}" title="Expiry Date(MM/YY)"/>
+                    <h:outputLabel value="Card Holder" for="cardholder" />
+                    <h:outputText id="cardholder" value="#{product.cardHolder}" title="Card Holder"/>
+                </h:panelGrid>
             </h:form>
         </f:view>
     </ui:define>

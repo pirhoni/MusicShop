@@ -32,6 +32,7 @@ public class OrderStatusBean {
                 + correlationId + "/status");
         ClientResponse response = resource.type("application/x-www-form-urlencoded ").get(ClientResponse.class);
 
+        //Catch 404 Code
         if (200 != response.getStatus()) {
             System.out.println("ERROR RETRIEVING STATUS VIA REST!");
             return null;

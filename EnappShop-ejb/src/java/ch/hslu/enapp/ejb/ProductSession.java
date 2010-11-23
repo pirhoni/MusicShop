@@ -34,10 +34,8 @@ public class ProductSession implements ProductSessionRemote {
     private EntityManager em;
     private Purchase purchase = new Purchase();
     private Map<Product, Purchaseitem> cart = new HashMap<Product, Purchaseitem>();
-
     @Inject
     private PostFinanceBean postFinance;
-
     @Inject
     private SalesOrderMSender salesOrderMSender;
 
@@ -102,7 +100,7 @@ public class ProductSession implements ProductSessionRemote {
     }
 
     @Override
-    public void checkout(Customer customer) {
+    public void checkout(Customer customer, CreditCard cc) {
 
         long total = 0;
         SalesOrderJMS soJms = new SalesOrderJMS();
@@ -117,9 +115,9 @@ public class ProductSession implements ProductSessionRemote {
 
         for (Purchaseitem pi : cart.values()) {
 
-           Query q = em.createNamedQuery("Product.findById");
-           q.setParameter("id", pi.getProductid());
-           Product p = (Product) q.getSingleResult();
+            Query q = em.createNamedQuery("Product.findById");
+            q.setParameter("id", pi.getProductid());
+            Product p = (Product) q.getSingleResult();
 
             SalesOrderJMS.PurchaseItem item = soJms.new PurchaseItem(p.getReference(), pi.getDescription(),
                     pi.getQuantity().toString(), String.valueOf(pi.getQuantity() * pi.getUnitprice()));
@@ -130,11 +128,12 @@ public class ProductSession implements ProductSessionRemote {
             em.merge(pi);
         }
 
-        CreditCard cc = new CreditCard();
-        cc.setCardNo("4111111111111111");
-        cc.setCustomerName("nicolas");
-        cc.setCvc("123");
-        cc.setExpiryDate("12/12");
+//        CreditCard cc = new CreditCard();
+//        cc.setCardNo("4111111111111111");
+//        cc.setCustomerName("nicolas");
+//        cc.setCvc("123");
+//        cc.setExpiryDate("12/12");
+
         NcResponse ncResponse = postFinance.makePayment(purchase.getId(), total, cc);
 
         SalesOrderJMS.PurchaseCustomer purchaseCustomer = soJms.new PurchaseCustomer(null, customer.getName(),
@@ -147,7 +146,7 @@ public class ProductSession implements ProductSessionRemote {
         soJms.setPurchaseItemList(sojmsItems);
         soJms.setStudent("tcnussba");
         soJms.setTotalPrice(String.valueOf(total));
-        
+
         String correlationId = salesOrderMSender.salesOrderMessageSender(soJms);
         purchase.setCorrelationId(correlationId);
         em.merge(purchase);

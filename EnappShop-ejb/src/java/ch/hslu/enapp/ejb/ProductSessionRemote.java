@@ -6,6 +6,7 @@ package ch.hslu.enapp.ejb;
 
 import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.Product;
+import ch.hslu.enapp.payment.CreditCard;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -30,7 +31,7 @@ public interface ProductSessionRemote {
 
     public ch.hslu.enapp.entities.Purchase getPurchase();
 
-    public void checkout(Customer customer);
+    public void checkout(Customer customer, CreditCard cc);
 
     public void increase(Product product);
 
