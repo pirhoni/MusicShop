@@ -11,7 +11,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/webshop/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -21,9 +21,34 @@
     <welcome-file-list>
         <welcome-file>webshop/Main.xhtml</welcome-file>
     </welcome-file-list>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/webshop/*</url-pattern>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
+    <security-constraint>
+        <display-name>Constraint1</display-name>
+        <web-resource-collection>
+            <web-resource-name>Webshop</web-resource-name>
+            <description/>
+            <url-pattern>/Checkout.xhtml</url-pattern>
+            <url-pattern>/PurchaseList.xhtml</url-pattern>
+            <url-pattern>/MyAccount.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>CUSTOMER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>webshow</realm-name>
+        <form-login-config>
+            <form-login-page>/Login.xhtml</form-login-page>
+            <form-error-page>/Login.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>Customers</description>
+        <role-name>CUSTOMER</role-name>
+    </security-role>
 </web-app>

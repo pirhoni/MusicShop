@@ -8,20 +8,19 @@
     <ui:define name="pageTitle">Login</ui:define>
     <ui:define name="content">
         <f:view>
-            <h:form id="login" rendered="#{!customer.loggedIn}" styleClass="hor-minimalist-a">
+            <h:form id="login" rendered="#{!login.loggedIn}" styleClass="hor-minimalist-a">
                 <h:message styleClass="msgStyle" for="username"/>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Username: "/>
-                    <h:inputText id="username" value="#{customer.login.username}"/>
+                    <h:inputText id="username" value="#{login.username}"/>
                     <h:outputLabel value="Password: "/>
-                    <h:inputSecret value="#{customer.login.password}"/>
+                    <h:inputSecret value="#{login.password}"/>
                     <h:outputText/>
                 </h:panelGrid>
                 <div class="buttons">
-                     <h:commandButton action="#{customer.login}" value="Login"/>
+                     <h:commandButton action="#{login.login}" value="Login"/>
                 </div>
             </h:form>
         </f:view>
     </ui:define>
 </ui:composition>
-

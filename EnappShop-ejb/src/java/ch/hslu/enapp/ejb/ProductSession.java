@@ -39,6 +39,7 @@ public class ProductSession implements ProductSessionRemote {
     @Inject
     private SalesOrderMSender salesOrderMSender;
 
+    @Override
     public void persist(Object object) {
         em.persist(object);
     }

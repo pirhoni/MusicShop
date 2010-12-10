@@ -6,19 +6,7 @@
     xmlns="http://java.sun.com/xml/ns/javaee" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
-    <navigation-rule>
-        <from-view-id>/CustomerDetails.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>LIST</from-outcome>
-            <to-view-id>/CustomerList.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/resources/templates/tie.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>DETAILS</from-outcome>
-            <to-view-id>/MyAccount.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+    <lifecycle>
+        <phase-listener>ch.hslu.enapp.web.helper.MessagePersister</phase-listener>
+    </lifecycle>
 </faces-config>

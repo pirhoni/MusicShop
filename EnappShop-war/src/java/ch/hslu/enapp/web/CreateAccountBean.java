@@ -4,9 +4,15 @@
  */
 package ch.hslu.enapp.web;
 
+import ch.hslu.d3s.enapp.common.Util;
 import ch.hslu.enapp.ejb.CustomerSessionRemote;
 import ch.hslu.enapp.entities.Customer;
+import ch.hslu.enapp.entities.CustomerGroup;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -14,7 +20,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.inject.Inject;
 
 /**
  *
@@ -26,8 +31,6 @@ public class CreateAccountBean implements Serializable {
 
     @EJB
     private CustomerSessionRemote customerSession;
-    @Inject
-    private CustomerBean customerBean;
     private Customer customer;
     private String tempPw;
 
@@ -47,8 +50,15 @@ public class CreateAccountBean implements Serializable {
     }
 
     public String create() {
+        try {
+            customer.setPassword(Util.createSHA1(customer.getPassword()));
+
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(CreateAccountBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(CreateAccountBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         customer = customerSession.saveCustomer(customer);
-        customerBean.getLogin().setCustomer(customer);
         return "Main?faces-redirect=true";
     }
 

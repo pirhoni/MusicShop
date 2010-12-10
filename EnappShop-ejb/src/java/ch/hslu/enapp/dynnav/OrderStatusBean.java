@@ -28,6 +28,10 @@ public class OrderStatusBean {
 
         Client client = Client.create();
 
+//        String url = "http://enappsrv01.icompany.intern:8080/DynNAVdaemon-war/resources/salesorder/"
+//                + correlationId + "/status";
+//        System.out.println(url);
+
         WebResource resource = client.resource("http://enappsrv01.icompany.intern:8080/DynNAVdaemon-war/resources/salesorder/"
                 + correlationId + "/status");
         ClientResponse response = resource.type("application/x-www-form-urlencoded ").get(ClientResponse.class);
@@ -42,12 +46,13 @@ public class OrderStatusBean {
             JAXBContext context = JAXBContext.newInstance(SalesOrderRestful.class);
             Unmarshaller u = context.createUnmarshaller();
             rrb = (SalesOrderRestful) u.unmarshal(response.getEntityInputStream());
+            return rrb.getStatus();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Status Error: ");
+            System.out.println(rrb.getStatus());
         }
-        System.out.println("Response " + response);
-        System.out.println(rrb.getCorrelationid());
-        System.out.println(rrb.getStatus());
-        return rrb.getStatus();
+
+        return null;
     }
 }

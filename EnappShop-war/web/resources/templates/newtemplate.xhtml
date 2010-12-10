@@ -21,14 +21,14 @@
                 <p>iCompany Luzern</p>
             </div>
             <div id="menu">
-                <c:if test="#{!customer.loggedIn}">
+                <c:if test="#{!login.loggedIn}">
                     <a href="Login.xhtml">Login</a> | <a href="NewAccount.xhtml">Register</a>
                 </c:if>
-                <c:if test="#{customer.loggedIn}">
+                <c:if test="#{login.loggedIn}">
                     <h:form>
                         <h:outputLink value="MyAccount.xhtml"> <h:outputText value="My Account"/>
                         </h:outputLink> |
-                        <h:commandLink value="Logout" action="#{customer.logout}"/> |
+                        <h:commandLink value="Logout" action="#{login.logout}"/> |
                         <h:outputLink value="PurchaseList.xhtml"> <h:outputText value="My Purchases"/>
                         </h:outputLink>
                     </h:form>
@@ -40,11 +40,11 @@
                     <a href="Main.xhtml">Home</a> | <a href="ProductList.xhtml">Products</a> | <a href="#">Contact Us</a>
                 </div>
                 <div align="left" class="smallwhitetext">
-                    <c:if test="#{!customer.loggedIn}">
+                    <c:if test="#{!login.loggedIn}">
                         <h:outputText value="Welcome dear Visitor"/>
                     </c:if>
-                    <c:if test="#{customer.loggedIn}">
-                        <h:outputText value="Welcome #{customer.login.customer.name}"/>
+                    <c:if test="#{login.loggedIn}">
+                        <h:outputText value="Welcome #{login.customer.name}"/>
                     </c:if>
                 </div>
 
@@ -54,6 +54,7 @@
                 <div id="page-bgtop">
                     <div id="page-bgbtm">
                         <div id="content" style="width:500px">
+                            <h:messages styleClass="msgStyle" globalOnly="true" />
                             <div class="post">
                                 <div class="smalltitle"><ui:insert name="pageTitle">Title</ui:insert></div>
                                 <!--                                <p class="meta">Posted by <a href="#">Someone</a> on March 10, 2008

@@ -7,7 +7,7 @@
     <ui:define name="pageTitle">Your Purchases</ui:define>
     <ui:define name="content">
         <f:view>
-            <h:form rendered="#{customer.loggedIn}" styleClass="hor-minimalist-b">
+            <h:form rendered="#{login.loggedIn}" styleClass="hor-minimalist-b">
                 <h1><h:outputText value="List of your previous purchases"/></h1>
                 <h:dataTable value="#{customer.purchases}" var="item">
                     <h:column>

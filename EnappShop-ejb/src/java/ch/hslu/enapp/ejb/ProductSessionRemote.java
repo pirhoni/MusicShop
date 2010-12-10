@@ -39,4 +39,6 @@ public interface ProductSessionRemote {
 
     public float getCartAmount();
 
+    public void persist(java.lang.Object object);
+
 }

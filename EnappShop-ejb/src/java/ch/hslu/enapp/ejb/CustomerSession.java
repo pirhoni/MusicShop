@@ -5,6 +5,7 @@
 package ch.hslu.enapp.ejb;
 
 import ch.hslu.enapp.entities.Customer;
+import ch.hslu.enapp.entities.CustomerGroup;
 import ch.hslu.enapp.entities.Purchase;
 import ch.hslu.enapp.entities.Purchaseitem;
 import java.math.BigDecimal;
@@ -58,6 +59,8 @@ public class CustomerSession implements CustomerSessionRemote {
 
     @Override
     public Customer saveCustomer(Customer customer) {
+        CustomerGroup group = new CustomerGroup(customer.getUsername(), "CUSTOMER");
+        em.persist(group);
         return em.merge(customer);
     }
 

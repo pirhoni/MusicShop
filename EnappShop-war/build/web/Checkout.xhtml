@@ -24,7 +24,7 @@
                     </h:column>
                 </h:dataTable>
                 <h:outputText value="Total Price: #{product.cartAmount}"/>
-                <h:form rendered="#{customer.loggedIn}">
+                <h:form rendered="#{login.loggedIn}">
                     <div class="buttons">
                         <h:commandButton action="#{product.checkout}" value="Buy!">
                             <f:ajax/>

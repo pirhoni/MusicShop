@@ -1,14 +1,8 @@
 
-/*
-Design by Free CSS Templates
-http://www.freecsstemplates.org
-Released for free under a Creative Commons Attribution 2.5 License
-*/
-
 body {
     margin: 0;
     padding: 0;
-    background: #EEEBEC url(images/img01.jpg) repeat-x left top;
+    background: #EEEBEC url(#{resource['images/img01.jpg']}) repeat-x left top;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #7F7F81;
@@ -68,7 +62,7 @@ img.aligncenter {
 }
 
 #wrapper {
-    background: url(images/img01.jpg) repeat-x left top;
+    background: url(#{resource['images/img01.jpg']}) repeat-x left top;
 }
 
 /* Header */
@@ -108,7 +102,7 @@ img.aligncenter {
     width: 980px;
     height: 51px;
     margin: 0px auto;
-    background: url(images/img03.jpg) no-repeat left top;
+    background: url(#{resource['images/img03.jpg']}) no-repeat left top;
 }
 
 #search form {
@@ -161,7 +155,7 @@ img.aligncenter {
     float: left;
     height: 24px;
     padding: 4px 30px 0px 30px;
-    background: url(images/img02.jpg) no-repeat left top;
+    background: url(#{resource['images/img02.jpg']}); no-repeat left top;
     text-decoration: none;
     text-transform: uppercase;
     text-shadow: #8A5608 0px 1px 1px;
@@ -173,11 +167,11 @@ img.aligncenter {
 }
 
 #menu li.current_page_item {
-    background: url(images/img09.jpg) no-repeat left top;
+    background: url(#{resource['images/img09.jpg']}) no-repeat left top;
 }
 
 #menu .current_page_item a {
-    background: url(images/img10.jpg) no-repeat right top;
+    background: url(#{resource['images/img10.jpg']}) no-repeat right top;
 }
 
 #menu a:hover {
@@ -188,7 +182,7 @@ img.aligncenter {
     width: 980px;
     height: 340px;
     margin: 0px auto;
-    background: url(images/img06.jpg) no-repeat left top;
+    background: url(#{resource['images/img06.jpg']}) no-repeat left top;
 }
 
 /* Page */
@@ -358,7 +352,7 @@ img.aligncenter {
 #footer-wrapper {
     overflow: hidden;
     padding: 0px 0px 0px 0px;
-    background: #2D2722 url(images/img02.jpg) repeat-x left top;
+    background: #2D2722 url(#{resource['images/img02.jpg']}) repeat-x left top;
 }
 
 #footer {
@@ -388,7 +382,7 @@ ul.style1 {
     padding: 0px;
     list-style: none;
     line-height: normal;
-    background: url(images/img04.jpg) repeat left top;
+    background: url(#{resource['images/img04.jpg']}) repeat left top;
     text-align: right;
 }
 

@@ -30,75 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UpdateMultiple }
+     * Create an instance of {@link UpdateResult }
      * 
      */
-    public UpdateMultiple createUpdateMultiple() {
-        return new UpdateMultiple();
-    }
-
-    /**
-     * Create an instance of {@link Update }
-     * 
-     */
-    public Update createUpdate() {
-        return new Update();
-    }
-
-    /**
-     * Create an instance of {@link CreateResult }
-     * 
-     */
-    public CreateResult createCreateResult() {
-        return new CreateResult();
-    }
-
-    /**
-     * Create an instance of {@link UpdateMultipleResult }
-     * 
-     */
-    public UpdateMultipleResult createUpdateMultipleResult() {
-        return new UpdateMultipleResult();
-    }
-
-    /**
-     * Create an instance of {@link CreateMultipleResult }
-     * 
-     */
-    public CreateMultipleResult createCreateMultipleResult() {
-        return new CreateMultipleResult();
-    }
-
-    /**
-     * Create an instance of {@link Create }
-     * 
-     */
-    public Create createCreate() {
-        return new Create();
-    }
-
-    /**
-     * Create an instance of {@link CreateMultiple }
-     * 
-     */
-    public CreateMultiple createCreateMultiple() {
-        return new CreateMultiple();
-    }
-
-    /**
-     * Create an instance of {@link IsUpdated }
-     * 
-     */
-    public IsUpdated createIsUpdated() {
-        return new IsUpdated();
-    }
-
-    /**
-     * Create an instance of {@link IsUpdatedResult }
-     * 
-     */
-    public IsUpdatedResult createIsUpdatedResult() {
-        return new IsUpdatedResult();
+    public UpdateResult createUpdateResult() {
+        return new UpdateResult();
     }
 
     /**
@@ -110,11 +46,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ReadMultiple }
+     * Create an instance of {@link Read }
      * 
      */
-    public ReadMultiple createReadMultiple() {
-        return new ReadMultiple();
+    public Read createRead() {
+        return new Read();
+    }
+
+    /**
+     * Create an instance of {@link CreateMultipleResult }
+     * 
+     */
+    public CreateMultipleResult createCreateMultipleResult() {
+        return new CreateMultipleResult();
+    }
+
+    /**
+     * Create an instance of {@link Update }
+     * 
+     */
+    public Update createUpdate() {
+        return new Update();
+    }
+
+    /**
+     * Create an instance of {@link CreateMultiple }
+     * 
+     */
+    public CreateMultiple createCreateMultiple() {
+        return new CreateMultiple();
+    }
+
+    /**
+     * Create an instance of {@link ItemList }
+     * 
+     */
+    public ItemList createItemList() {
+        return new ItemList();
+    }
+
+    /**
+     * Create an instance of {@link ReadMultipleResult }
+     * 
+     */
+    public ReadMultipleResult createReadMultipleResult() {
+        return new ReadMultipleResult();
     }
 
     /**
@@ -134,22 +110,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ReadMultipleResult }
-     * 
-     */
-    public ReadMultipleResult createReadMultipleResult() {
-        return new ReadMultipleResult();
-    }
-
-    /**
-     * Create an instance of {@link Read }
-     * 
-     */
-    public Read createRead() {
-        return new Read();
-    }
-
-    /**
      * Create an instance of {@link Item }
      * 
      */
@@ -158,19 +118,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ItemList }
+     * Create an instance of {@link IsUpdated }
      * 
      */
-    public ItemList createItemList() {
-        return new ItemList();
+    public IsUpdated createIsUpdated() {
+        return new IsUpdated();
     }
 
     /**
-     * Create an instance of {@link UpdateResult }
+     * Create an instance of {@link IsUpdatedResult }
      * 
      */
-    public UpdateResult createUpdateResult() {
-        return new UpdateResult();
+    public IsUpdatedResult createIsUpdatedResult() {
+        return new IsUpdatedResult();
+    }
+
+    /**
+     * Create an instance of {@link ReadMultiple }
+     * 
+     */
+    public ReadMultiple createReadMultiple() {
+        return new ReadMultiple();
     }
 
     /**
@@ -179,6 +147,38 @@ public class ObjectFactory {
      */
     public ReadResult createReadResult() {
         return new ReadResult();
+    }
+
+    /**
+     * Create an instance of {@link Create }
+     * 
+     */
+    public Create createCreate() {
+        return new Create();
+    }
+
+    /**
+     * Create an instance of {@link CreateResult }
+     * 
+     */
+    public CreateResult createCreateResult() {
+        return new CreateResult();
+    }
+
+    /**
+     * Create an instance of {@link UpdateMultiple }
+     * 
+     */
+    public UpdateMultiple createUpdateMultiple() {
+        return new UpdateMultiple();
+    }
+
+    /**
+     * Create an instance of {@link UpdateMultipleResult }
+     * 
+     */
+    public UpdateMultipleResult createUpdateMultipleResult() {
+        return new UpdateMultipleResult();
     }
 
 }

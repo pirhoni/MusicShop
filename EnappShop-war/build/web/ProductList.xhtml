@@ -30,7 +30,7 @@
                         <h:outputText value="#{item.unitprice}"/>
                     </h:column>
 
-                    <h:column rendered="#{customer.loggedIn}">
+                    <h:column rendered="#{login.loggedIn}">
                         <div class="buttons">
                             <h:commandButton value="Add to cart" action="#{product.addToCart(item)}">
                                 <f:ajax render=":products :cart"/>
@@ -42,7 +42,7 @@
         </f:view>
 
         <f:view>
-            <h:form id="cart" rendered="#{customer.loggedIn}" styleClass="hor-minimalist-b">
+            <h:form id="cart" rendered="#{login.loggedIn}" styleClass="hor-minimalist-b">
                 <h2 class="smalltitle"><h:outputText value="Cart"/></h2>
                 <h:dataTable value="#{product.cartProducts}" var="item">
                     <h:column>
@@ -91,7 +91,7 @@
                 <h:outputText value="Total Price: #{product.cartAmount}"/>
             </h:form>
         </f:view>
-        <h:form rendered="#{customer.loggedIn}">
+        <h:form rendered="#{login.loggedIn}">
             <div class="buttons">
                 <a href="Checkout.xhtml">Checkout</a>
             </div>
