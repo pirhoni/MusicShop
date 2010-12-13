@@ -16,8 +16,10 @@
                     <h:inputText id="address" value="#{login.customer.address}" title="Address" />
                     <h:outputLabel value="Email:" for="email" />
                     <h:inputText id="email" value="#{login.customer.email}" title="Email" />
+                    <h:outputLabel value="DynNav ID" for="dynnavid" />
+                    <h:inputText readonly="true" id="dynnavid" value="#{login.customer.dynnav}" title="DynNav ID" />
                     <h:outputLabel value="Username:" for="username" />
-                    <h:inputText id="username" value="#{login.customer.username}" title="Username" required="true" requiredMessage="The Username field is required."/>
+                    <h:inputText readonly="true" id="username" value="#{login.customer.username}" title="Username" required="true" requiredMessage="The Username field is required."/>
                     <h:outputLabel value="Password:" for="password" />
                     <h:inputSecret id="password" value="#{customer.tempPw}" title="Password" />
                 </h:panelGrid>

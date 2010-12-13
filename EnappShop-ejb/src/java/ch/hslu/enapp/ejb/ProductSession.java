@@ -137,8 +137,14 @@ public class ProductSession implements ProductSessionRemote {
 
         NcResponse ncResponse = postFinance.makePayment(purchase.getId(), total, cc);
 
+        //DynNav Customer Id holen und auf null überprüfen
+        //String custId = customer.getDynnav().length() > 0 ? customer.getDynnav() : null;
+
+        //CustId als navCustId übergeben
         SalesOrderJMS.PurchaseCustomer purchaseCustomer = soJms.new PurchaseCustomer(null, customer.getName(),
                 customer.getAddress(), "1234", "Luzern", customer.getId().toString(), customer.getUsername());
+
+        //System.out.println("NAVCustomerNr : " + custId);
 
         soJms.setPayId(ncResponse.getPayId());
         soJms.setPurchaseCustomer(purchaseCustomer);
@@ -147,6 +153,14 @@ public class ProductSession implements ProductSessionRemote {
         soJms.setPurchaseItemList(sojmsItems);
         soJms.setStudent("tcnussba");
         soJms.setTotalPrice(String.valueOf(total));
+
+        System.out.println("PayID: " + soJms.getPayId());
+        System.out.println("Purchase Customer: " + soJms.getPurchaseCustomer());
+        System.out.println("Purchase Date: " + soJms.getPurchaseDate());
+        System.out.println("Purchase ID: " + soJms.getPurchaseId());
+        System.out.println("Purchase Item List: " + soJms.getPurchaseItemList());
+        System.out.println("Student: " + soJms.getStudent());
+        System.out.println("Total Price: " + soJms.getTotalPrice());
 
         String correlationId = salesOrderMSender.salesOrderMessageSender(soJms);
         purchase.setCorrelationId(correlationId);

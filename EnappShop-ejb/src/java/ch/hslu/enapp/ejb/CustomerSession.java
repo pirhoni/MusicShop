@@ -65,8 +65,9 @@ public class CustomerSession implements CustomerSessionRemote{
     
     @Override
     public Customer saveCustomer(Customer customer) {
-        CustomerGroup group = new CustomerGroup(customer.getUsername(), "CUSTOMER");
-        em.persist(group);
+        CustomerGroup group = new CustomerGroup(customer.getUsername(), "USER");
+//        em.persist(group);
+        em.merge(group);
         return em.merge(customer);
     }
 

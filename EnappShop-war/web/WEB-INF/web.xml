@@ -22,17 +22,18 @@
         <welcome-file>webshop/Main.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
-        <display-name>Constraint1</display-name>
+        <display-name>Protected Area</display-name>
         <web-resource-collection>
             <web-resource-name>Webshop</web-resource-name>
             <description/>
             <url-pattern>/Checkout.xhtml</url-pattern>
             <url-pattern>/PurchaseList.xhtml</url-pattern>
             <url-pattern>/MyAccount.xhtml</url-pattern>
+            <url-pattern>/Login.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>CUSTOMER</role-name>
+            <role-name>USER</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>
@@ -49,6 +50,6 @@
     </login-config>
     <security-role>
         <description>Customers</description>
-        <role-name>CUSTOMER</role-name>
+        <role-name>USER</role-name>
     </security-role>
 </web-app>

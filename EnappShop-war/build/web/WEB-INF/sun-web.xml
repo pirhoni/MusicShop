@@ -6,6 +6,10 @@
     <role-name>CUSTOMER</role-name>
     <group-name>CUSTOMER</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>USER</role-name>
+    <group-name>USER</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

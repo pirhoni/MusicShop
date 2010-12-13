@@ -5,17 +5,11 @@
 package ch.hslu.enapp.mdb;
 
 import ch.hslu.d3s.enapp.common.SalesOrderJMS;
-import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Random;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.jms.DeliveryMode;
-import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.QueueConnection;
@@ -50,8 +44,6 @@ public class SalesOrderMSender {
             QueueSender sender = session.createSender(queue);
             sender.setDeliveryMode(DeliveryMode.PERSISTENT);
 
-            //Generate a Reply Temp Queue
-//            TemporaryQueue myReplyToQueue = session.createTemporaryQueue();
 
             // Creates a ObjectMessaage and set the Object!
             ObjectMessage message = session.createObjectMessage(data);
@@ -63,9 +55,8 @@ public class SalesOrderMSender {
 
             message.setJMSReplyTo(replyqueue);
 
+            System.out.println("Sending message");
             sender.send(message);
-
-            System.out.println("Waiting to Response");
             System.out.println("Response from JMS DYNNAV");
             System.out.println(message.getJMSReplyTo().toString());
 
@@ -83,29 +74,29 @@ public class SalesOrderMSender {
         return null;
     }
 
-    public void salesOrderMessageReplySender(Message data) {
-        try {
-            //Internal Reply Queue
-            QueueConnection connectionReply = connectionReplyFactory.createQueueConnection();
-            Session sessionReply = connectionReply.createSession(true, Session.AUTO_ACKNOWLEDGE);
-            MessageProducer producerReply = sessionReply.createProducer((Destination) replyqueue);
-
-            // Setup for Dynnav Queue Message
-            ObjectMessage messageReply = sessionReply.createObjectMessage();
-            messageReply.setStringProperty("MessageFormat", "Version 1.0");
-            messageReply.setJMSCorrelationID(Calendar.getInstance().getTimeInMillis() + "");
-
-            //Setes up the Data to send to Dynnav
-            messageReply.setObject((Serializable) data);
-            producerReply.send(messageReply);
-
-            System.out.println("");
-            System.out.println("Response from JMS DYNNAV");
-            System.out.println(data);
-
-            connectionReply.close();
-
-        } catch (Exception e) {
-        }
-    }
+//    public void salesOrderMessageReplySender(Message data) {
+//        try {
+//            //Internal Reply Queue
+//            QueueConnection connectionReply = connectionReplyFactory.createQueueConnection();
+//            Session sessionReply = connectionReply.createSession(true, Session.AUTO_ACKNOWLEDGE);
+//            MessageProducer producerReply = sessionReply.createProducer((Destination) replyqueue);
+//
+//            // Setup for Dynnav Queue Message
+//            ObjectMessage messageReply = sessionReply.createObjectMessage();
+//            messageReply.setStringProperty("MessageFormat", "Version 1.0");
+//            messageReply.setJMSCorrelationID(Calendar.getInstance().getTimeInMillis() + "");
+//
+//            //Setes up the Data to send to Dynnav
+//            messageReply.setObject((Serializable) data);
+//            producerReply.send(messageReply);
+//
+//            System.out.println("");
+//            System.out.println("Response from JMS DYNNAV");
+//            System.out.println(data);
+//
+//            connectionReply.close();
+//
+//        } catch (Exception e) {
+//        }
+//    }
 }

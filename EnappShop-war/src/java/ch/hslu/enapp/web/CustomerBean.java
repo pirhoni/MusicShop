@@ -17,6 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 
@@ -35,10 +37,10 @@ public class CustomerBean implements Serializable {
     private CustomerSessionRemote customerSession;
     @Inject
     private LoginBean login;
-    private Customer customer;
+//    private Customer customer;
     private int purchaseId;
     private String tempPw;
-
+    
     public CustomerBean() {
     }
 
@@ -54,10 +56,9 @@ public class CustomerBean implements Serializable {
         return login;
     }
 
-    public Customer getDetails() {
-        return customer;
-    }
-
+//    public Customer getDetails() {
+//        return customer;
+//    }
     public int getPurchaseId() {
         return purchaseId;
     }
@@ -66,11 +67,10 @@ public class CustomerBean implements Serializable {
         this.purchaseId = purchaseId;
     }
 
-    public String showDetails(Customer customer) {
-        this.customer = customer;
-        return "MyAccount?faces-redirect=true";
-    }
-
+//    public String showDetails(Customer customer) {
+//        this.customer = customer;
+//        return "MyAccount?faces-redirect=true";
+//    }
 //    public void select(Customer customer) {
 //    }
 //
@@ -96,8 +96,10 @@ public class CustomerBean implements Serializable {
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(CustomerBean.class.getName()).log(Level.SEVERE, null, ex);
             }
+            FacesContext.getCurrentInstance().addMessage("edit:password", new FacesMessage(FacesMessage.SEVERITY_INFO, "Password Changed", "Password Changed"));
         }
-        customerSession.saveCustomer(login.getCustomer());
+//        customerSession.saveCustomer(login.getCustomer());
+        login.setCustomer(customerSession.saveCustomer(login.getCustomer()));
         return "MyAccount?faces-redirect=true";
     }
 

@@ -95,7 +95,7 @@ public class ProductBean implements Serializable {
         cc.setCvc("123");
         cc.setExpiryDate("12/12");
 
-//        productSession.checkout(customer.getLogin().getCustomer(), cc);
+        productSession.checkout(customer.getLogin().getCustomer(), cc);
         return "Thanks?faces-redirect=true";
     }
 
