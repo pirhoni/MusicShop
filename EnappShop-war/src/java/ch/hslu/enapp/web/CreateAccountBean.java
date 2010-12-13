@@ -5,6 +5,7 @@
 package ch.hslu.enapp.web;
 
 import ch.hslu.d3s.enapp.common.Util;
+import ch.hslu.enapp.ejb.CustomerSessionClientRemote;
 import ch.hslu.enapp.ejb.CustomerSessionRemote;
 import ch.hslu.enapp.entities.Customer;
 import ch.hslu.enapp.entities.CustomerGroup;

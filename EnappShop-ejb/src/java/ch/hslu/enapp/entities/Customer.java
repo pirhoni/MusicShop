@@ -27,28 +27,31 @@ import javax.persistence.Table;
     @NamedQuery(name = "Customer.findById", query = "SELECT c FROM Customer c WHERE c.id = :id"),
     @NamedQuery(name = "Customer.findByUsername", query = "SELECT c FROM Customer c WHERE c.username = :username"),
     @NamedQuery(name = "Customer.findByPassword", query = "SELECT c FROM Customer c WHERE c.password = :password"),
-    @NamedQuery(name = "Customer.findByUsernameAndPassword", query = "SELECT c FROM Customer c WHERE c.username = :username AND c.password = :password"),
     @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.name = :name"),
     @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address"),
-    @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")})
+    @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email"),
+    @NamedQuery(name = "Customer.findByUsernameAndPassword", query = "SELECT c FROM Customer c WHERE c.username = :username AND c.password = :password"),
+    @NamedQuery(name = "Customer.findByDynnav", query = "SELECT c FROM Customer c WHERE c.dynnav = :dynnav")})
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "username", nullable = false, length = 15)
+    @Column(name = "username")
     private String username;
-    @Column(name = "password", length = 32)
+    @Column(name = "password")
     private String password;
-    @Column(name = "name", length = 45)
+    @Column(name = "name")
     private String name;
-    @Column(name = "address", length = 45)
+    @Column(name = "address")
     private String address;
-    @Column(name = "email", length = 90)
+    @Column(name = "email")
     private String email;
+    @Column(name = "dynnav")
+    private String dynnav;
 
     public Customer() {
     }
@@ -108,6 +111,14 @@ public class Customer implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDynnav() {
+        return dynnav;
+    }
+
+    public void setDynnav(String dynnav) {
+        this.dynnav = dynnav;
     }
 
     @Override

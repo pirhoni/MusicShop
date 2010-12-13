@@ -20,22 +20,25 @@ import javax.persistence.Query;
  * @author nnussbaumer
  */
 @Stateful
-public class CustomerSession implements CustomerSessionRemote {
+public class CustomerSession implements CustomerSessionRemote{
 
     @PersistenceContext(unitName = "EnappShop-ejbPU")
     private EntityManager em;
 
+    
     @Override
     public void persist(Object object) {
         em.persist(object);
     }
 
+    
     @Override
     public List<Customer> getCustomers() {
         Query q = em.createNamedQuery("Customer.findAll");
         return q.getResultList();
     }
 
+    
     @Override
     public Customer getCustomer(Integer id) {
         Query q = em.createNamedQuery("Customer.findById", Customer.class);
@@ -43,6 +46,7 @@ public class CustomerSession implements CustomerSessionRemote {
         return (Customer) q.getSingleResult();
     }
 
+    
     @Override
     public List<Purchaseitem> getPurchaseItems(int purchaseId) {
         Query q = em.createNamedQuery("Purchaseitem.findByPurchaseid");
@@ -50,6 +54,7 @@ public class CustomerSession implements CustomerSessionRemote {
         return q.getResultList();
     }
 
+    
     @Override
     public List<Purchase> getPurchases(Customer customer) {
         Query q = em.createNamedQuery("Purchase.findByCustomerid");
@@ -57,6 +62,7 @@ public class CustomerSession implements CustomerSessionRemote {
         return q.getResultList();
     }
 
+    
     @Override
     public Customer saveCustomer(Customer customer) {
         CustomerGroup group = new CustomerGroup(customer.getUsername(), "CUSTOMER");
@@ -64,6 +70,12 @@ public class CustomerSession implements CustomerSessionRemote {
         return em.merge(customer);
     }
 
+
+    public void updateCustomer(Customer customer) {
+        em.merge(customer);
+    }
+
+    
     @Override
     public Customer verifyLogin(String username, String password) {
         Query q = em.createNamedQuery("Customer.findByUsernameAndPassword");
@@ -73,6 +85,7 @@ public class CustomerSession implements CustomerSessionRemote {
         return list.isEmpty() ? null : list.get(0);
     }
 
+    
     @Override
     public float getTotal(int purchaseId) {
         Query q = em.createNativeQuery("SELECT sum(unitprice * quantity) as total FROM purchaseitem where purchaseid = " + purchaseId);
