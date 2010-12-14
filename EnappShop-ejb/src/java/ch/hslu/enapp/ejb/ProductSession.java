@@ -138,13 +138,14 @@ public class ProductSession implements ProductSessionRemote {
         NcResponse ncResponse = postFinance.makePayment(purchase.getId(), total, cc);
 
         //DynNav Customer Id holen und auf null überprüfen
-        //String custId = customer.getDynnav().length() > 0 ? customer.getDynnav() : null;
+
+        String dynNavId = customer.getDynnav().length() > 0 ? customer.getDynnav() : null;
 
         //CustId als navCustId übergeben
-        SalesOrderJMS.PurchaseCustomer purchaseCustomer = soJms.new PurchaseCustomer(null, customer.getName(),
+        SalesOrderJMS.PurchaseCustomer purchaseCustomer = soJms.new PurchaseCustomer(dynNavId, customer.getName(),
                 customer.getAddress(), "1234", "Luzern", customer.getId().toString(), customer.getUsername());
 
-        //System.out.println("NAVCustomerNr : " + custId);
+        //System.out.println("NAVCustomerNr : " + dynNavId);
 
         soJms.setPayId(ncResponse.getPayId());
         soJms.setPurchaseCustomer(purchaseCustomer);
